@@ -3,7 +3,8 @@ from cs50 import SQL
 from flask_session import Session
 from helpers import login_required, apology
 from flask_cors import CORS
-import os, pyrebase
+import os, pyrebase, requests
+from news import make_news_api_request, categories
 from personality import personality_tests, check_user_choice, personality_details, user_personality, is_user_data_complete
 
 
@@ -223,6 +224,57 @@ def profile():
         user = user_db[0]
 
     return render_template("profile.html", user=user)
+
+
+# /////////
+# NEWS_API
+@app.route("/search_news/<string:q>")
+def search(q):
+    params = {'q': q, 'sortBy': 'popularity'}
+    return make_news_api_request('everything', params)
+
+
+@app.route("/news_category/<string:c>")
+def category(c):
+    params = {'category': c, 'country': 'us'}
+    return make_news_api_request('top-headlines', params)
+# END NEWS_API
+# /////////////
+
+
+
+@app.route("/find_soul")
+@login_required
+def find_soul():
+    return render_template("search_user.html")
+
+
+
+
+@app.route("/search_user")
+@login_required
+def search_user():
+    resp_db = db.execute("SELECT name, avatar_url, personality_type FROM users WHERE name LIKE ?", "%" + request.args.get("q") + "%")
+    return resp_db
+
+
+
+@app.route("/avatar/<string:user_name>")
+@login_required
+def avatar(user_name):
+    user_in_db = db.execute("SELECT * FROM users WHERE name = ?", user_name)
+    if user_in_db:
+        return render_template("profile.html", user = user_in_db[0])
+    
+    return apology("Something went wrong! Please go back to homepage")
+
+
+# HOME ROUTES
+@app.route("/share_opinion")
+@login_required
+def share_opinion():
+    return render_template("share_opinion.html", categories=categories)
+
 
 
 if __name__ == "__main__":

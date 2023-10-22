@@ -9,9 +9,9 @@
         🕴️ How do you feel like today?
     </h2>
     <div class="grid">
-        <button class="articles contrast outline" data-link="share-opinion">🗣️ I wanna share my opinions</button>
-        <button class="articles contrast outline" data-link="write-story">📝 I wanna write a story</button>
-        <button class="articles contrast outline" data-link="share-memories">✨ I wanna share memories</button>
+        <button class="articles contrast outline dir" data-link="share_opinion">🗣️ I wanna share my opinions</button>
+        <button class="articles contrast outline dir" data-link="write_story">📝 I wanna write a story</button>
+        <button class="articles contrast outline dir" data-link="share_memories">✨ I wanna share memories</button>
     </div>
 </div>
 {% else %}
@@ -48,4 +48,5 @@
 
 {% block script %}
 <script src="{{ url_for('static', filename='new_user.js') }}"></script>
+<script src="{{ url_for('static', filename='user.js') }}"></script>
 {% endblock %}

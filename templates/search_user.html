@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}Search for a soul{% endblock %}
+
+{% block body %}
+<div></div>
+<div class="show">
+    <input id="by-user-name" autocomplete="off" autofocus placeholder="Look for a soul" type="search">
+    <div class="user_search_output"></div>
+</div>
+<div></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='search_user.js') }}"></script>
+{% endblock %}
