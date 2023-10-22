@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 # Enable CORS for your app with permissive settings
 CORS(app, resources={r"/*": {"origins": "http://localhost:5000"}})
-# CORS(app, resources={r"/*": {"origins": "https://"}})
+CORS(app, resources={r"/*": {"origins": "https://soulkeeper.onrender.com"}})
 
 db = SQL(os.environ.get("SQL_ENVIRONMENT"))
 
