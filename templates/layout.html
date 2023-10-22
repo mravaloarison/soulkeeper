@@ -18,18 +18,18 @@
     <nav class="container">
         {% if session["uid"] %}
         <ul>
-            <li><a href="/home">Home</a></li>
+            <li><a href="/home">🏡 Home</a></li>
             <li>
-                <a href="/profile">My AvatarSoul
+                <a href="/profile" >😄 profile
                 </a>
             </li>
-            <li><a href="">🔎 Find a soul</a></li>
+            <li><a href="/find_soul" >🔎 search</a></li>
         </ul>
         <ul><li><a href="/logout" role="button" class="contrast">Logout</a></li></ul>
         {% endif %}
     </nav>
     <main class="container">
-        <section class="grid">
+        <section id="mother" class="grid">
             {% block body %}{% endblock %}
         </section>
     </main>
