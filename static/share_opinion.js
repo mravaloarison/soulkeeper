@@ -16,11 +16,27 @@ async function talkAbout(e) {
     const blockquoteContainer = document.getElementById("block-quote-container");
 
     for (let i = 0; i < 3; i++) {
-        const blockquote = document.createElement("blockquote");
-
-        blockquote.textContent = data.articles[i].description;
-
-        blockquoteContainer.appendChild(blockquote);
+        // Clone the HTML structure inside the loop
+        const form = document.createElement("form");
+        form.action = `/get_idea/${e.id}`;
+        form.innerHTML = `
+            <blockquote>
+                "${data.articles[i].description}"
+                <footer>
+                    <textarea name="user_idea_input" placeholder="Share your idea"></textarea>
+                    <textarea style="display: none;" name="title">${data.articles[i].title}</textarea>
+                    <label class="grid">
+                        <button type="submit" class="outline">Submit</button>
+                        <div></div><div></div><div></div><div></div>
+                    </label>
+                </footer>
+            </blockquote>
+        `;
+    
+        // Append the form to the container
+        blockquoteContainer.appendChild(form);
     }
+    
+
     blockquoteContainer.style.display = "block";
 }
