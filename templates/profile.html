@@ -3,12 +3,23 @@
 {% block page_title %} {{ user.name }} profile {% endblock %}
 
 {% block body %}
-    <div></div>
-    <article>
-        <div>
-            <img src="https://api.multiavatar.com/{{ user.name }}.png" alt="Your soulavatar" />
-        </div>
-        <h3 style="margin-top: 20px; text-align: center;">{{ user.name }}</h3>
-    </article>
-    <div></div>
+<div class="show">
+    <img src="https://api.multiavatar.com/{{ user.name }}.png" alt="Your soulavatar" />
+    <h3 style="margin-top: 20px; text-align: center;">{{ user.name }}</h3>
+</div>
+<div>
+    <h3>Your AvatarSoul Progress</h3>
+    <label>🙂 Personality <span><ins><small><sub><i><abbr>59% complete</abbr></i></sub></small></ins></span>
+        <progress value="59.5" max="100"></progress>
+    </label>
+
+    <label>🗣️ Idea expression <span><ins><small><sub><i><abbr>7% complete</abbr></i></sub></small></ins></span>
+        <progress value="7" max="100"></progress>
+    </label>
+
+    <label>📝 Storytelling <span><ins><small><sub><i><abbr>13% complete</abbr></i></sub></small></ins></span>
+        <progress value="13" max="100"></progress>
+    </label>
+</div>
+<div></div>
 {% endblock %}

@@ -17,16 +17,15 @@
     
     <nav class="container">
         {% if session["uid"] %}
-        <ul><li>
-            <a href="/profile">
-                {% if session["username"] %}
-                {{ session["username"] }}
-                {% else %}
-                {{ session["email"] }}
-                {% endif %}
-            </a>
-        </li></ul>
-            <ul><li><a href="/logout" role="button" class="contrast">Logout</a></li></ul>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li>
+                <a href="/profile">My AvatarSoul
+                </a>
+            </li>
+            <li><a href="">🔎 Find a soul</a></li>
+        </ul>
+        <ul><li><a href="/logout" role="button" class="contrast">Logout</a></li></ul>
         {% endif %}
     </nav>
     <main class="container">
