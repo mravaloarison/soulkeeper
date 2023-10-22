@@ -6,25 +6,29 @@
 <div class="show">
     <img src="https://api.multiavatar.com/{{ user.name }}.png" alt="Your soulavatar" />
     <h3 style="margin-top: 20px; text-align: center;">{{ user.name }}</h3>
+    <kbd>{{ user.personality_type }}</kbd>
     {% if not session["email"] == user.email %}
-    <button class="outline contrast">Talk to the Avatar</button>
+    <button onclick="socketTheGPT()" class="outline contrast">Talk to the Avatar</button>
     {% endif %}
 </div>
 <div>
 </div>
 <div>
     <h3>AvatarSoul Progress</h3>
-    <label>🙂 Personality <span><ins><small><sub><i><abbr>59% complete</abbr></i></sub></small></ins></span>
-        <progress value="59.5" max="100"></progress>
+    {% for item in progress_data %}
+    <label>{{ item['emoji'] }} {{ item['label'] }} <span><ins><small><sub><i><abbr>{{ item['percentage']|float|round(2) }}% complete</abbr></i></sub></small></ins></span>
+        <progress value="{{ item['percentage']|float|round(2) }}" max="100"></progress>
     </label>
+    {% endfor %}
 
-    <label>🗣️ Idea expression <span><ins><small><sub><i><abbr>7% complete</abbr></i></sub></small></ins></span>
-        <progress value="7" max="100"></progress>
-    </label>
-
-    <label>📝 Storytelling <span><ins><small><sub><i><abbr>13% complete</abbr></i></sub></small></ins></span>
-        <progress value="13" max="100"></progress>
-    </label>
-
+    <h3>⏳ Most recent</h3>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    function socketTheGPT() {
+        alert("This feature will be enable soon!")
+    }
+</script>
 {% endblock %}

@@ -223,7 +223,23 @@ def profile():
     else: 
         user = user_db[0]
 
-    return render_template("profile.html", user=user)
+    stories_db = db.execute("SELECT * FROM stories")
+    comments = db.execute("SELECT * FROM commments")
+
+
+    idea_shared = len(comments) 
+    idea_accuracy_avatar = idea_shared / 27
+
+    story_shared = len(stories_db)
+    story_accuracy_avatar = story_shared / 20
+
+    progress_data = [
+        { "emoji": "🙂", "label": "Personality", "percentage": 12 },
+        { "emoji": "🗣️", "label": "Idea expression", "percentage": idea_accuracy_avatar },
+        { "emoji": "📝", "label": "Storytelling", "percentage": story_accuracy_avatar },
+    ]
+
+    return render_template("profile.html", user=user, progress_data = progress_data)
 
 
 # /////////
@@ -264,7 +280,21 @@ def search_user():
 def avatar(user_name):
     user_in_db = db.execute("SELECT * FROM users WHERE name = ?", user_name)
     if user_in_db:
-        return render_template("profile.html", user = user_in_db[0])
+        stories_db = db.execute("SELECT * FROM stories WHERE user_id = ?", user_in_db[0]["user_id"])
+        comments = db.execute("SELECT * FROM commments WHERE user_id = ?", user_in_db[0]["user_id"])
+
+        idea_shared = len(comments) 
+        idea_accuracy_avatar = idea_shared / 27
+
+        story_shared = len(stories_db)
+        story_accuracy_avatar = story_shared / 20
+
+        progress_data = [
+            { "emoji": "🙂", "label": "Personality", "percentage": 12 },
+            { "emoji": "🗣️", "label": "Idea expression", "percentage": idea_accuracy_avatar },
+            { "emoji": "📝", "label": "Storytelling", "percentage": story_accuracy_avatar },
+        ]
+        return render_template("profile.html", user = user_in_db[0], progress_data = progress_data)
     
     return apology("Something went wrong! Please go back to homepage")
 
@@ -276,6 +306,35 @@ def share_opinion():
     return render_template("share_opinion.html", categories=categories)
 
 
+@app.route("/get_idea/<string:type>")
+@login_required
+def get_idea(type):
+
+    user_id = db.execute("SELECT user_id FROM users WHERE email = ?", session["email"])
+    if user_id:
+        db.execute("INSERT INTO commments (content, post_title, post_type, user_id) VALUES (?, ?, ?, ?)", 
+            request.args.get("user_idea_input"),
+            request.args.get("title"),
+            type,
+            int(user_id[0]['user_id'])
+        )
+
+    
+    comments = db.execute("SELECT * FROM commments")
+    if comments:
+        idea_shared = len(comments) 
+        idea_accuracy_avatar = idea_shared / 27
+
+    return render_template("successful.html", accuracy=idea_accuracy_avatar)
+
+
+@app.route("/talk_to_the_avatar/<int:id>")
+def talk_to_the_avatar(id):
+
+    avatar = db.execute("SELECT personality_type FROM users WHERE user_id = ?", id)
+    avatar_type= avatar[0]["personality_type"]
+
+    ...
 
 if __name__ == "__main__":
     app.run(debug=True)
