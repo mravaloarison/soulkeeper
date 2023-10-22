@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Include Firebase SDK scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <!-- PICO css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
+    <title>Soulkeeper | {% block page_title %}{% endblock%}</title>
+</head>
+<body>
+    
+    <nav class="container">
+        {% if session["uid"] %}
+        <ul><li>
+            <a href="/profile">
+                {% if session["username"] %}
+                {{ session["username"] }}
+                {% else %}
+                {{ session["email"] }}
+                {% endif %}
+            </a>
+        </li></ul>
+            <ul><li><a href="/logout" role="button" class="contrast">Logout</a></li></ul>
+        {% endif %}
+    </nav>
+    <main class="container">
+        <section class="grid">
+            {% block body %}{% endblock %}
+        </section>
+    </main>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="{{ url_for('static', filename='animation.js') }}"></script>
+
+    {% block script %}
+    {% endblock %}
+
+
+</body>
+</html>

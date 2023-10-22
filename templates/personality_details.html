@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}Personality result{% endblock %}
+
+{% block body %}
+<div class="slide">
+    <h3>🎉 Congratulations! Your Personality is</h3>
+    <mark>{{ personality_type }}</mark>
+    <blockquote>{{ details }}</blockquote>
+    <a href="/profile" role="button" class="contrast">Go to profile</a>
+</div>
+{% endblock %}

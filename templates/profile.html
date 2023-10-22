@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block page_title %} {{ user.name }} profile {% endblock %}
+
+{% block body %}
+    <div></div>
+    <article>
+        <div>
+            <img src="https://api.multiavatar.com/{{ user.name }}.png" alt="Your soulavatar" />
+        </div>
+        <h3 style="margin-top: 20px; text-align: center;">{{ user.name }}</h3>
+    </article>
+    <div></div>
+{% endblock %}

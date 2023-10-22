@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block page_title %} Test number {{ index }} {% endblock %}
+
+{% block body %}
+
+<div>
+    <progress value="{{ (index) * 20 }}" max="100"></progress>
+    <form class="slide" action="/submit_personality_test/{{ index }}" method="POST">
+        <fieldset>
+            <legend>{{ index + 1 }}. {{ questions['question'] }}</legend>
+            {% for choice, text in questions['options'].items() %}
+            <label for="{{ choice }}">
+                <input type="radio" id="{{ choice }}" name="question{{ index }}" value="{{ personality_tests['scoring'][choice] }}" required>
+                {{ text }}
+            </label>
+            {% endfor %}
+        </fieldset>
+        <button type="submit" style="width: fit-content;">Submit</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+
+{% endblock %}

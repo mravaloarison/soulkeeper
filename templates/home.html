@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}Home{% endblock %}
+
+{% block body %}
+<div>
+    {% if registered %}
+    {{session["email"]}}
+    {% else %}
+        <strong class="show">👋 Welcome to soulkeeper, first create your soulavatar & your soulname</strong>
+        <form class="show" id="avatarForm">
+            <label>
+                <blockquote>
+                    <div id="display_avatar" style="width: 150px; height: 150px;">
+                        <img src="{{ avatar }}" id="to-del" alt="" />
+                    </div>
+                    <footer><cite>My Avatar Soul</cite></footer>
+                </blockquote>
+                <input name="username" type="text" id="user-name" placeholder="Soulname" required />
+            </label>
+    
+            <a id="saveButton" class="outline" href="#" role="button">Save</a>
+        </form>
+    
+        <a href="/start_personality_test/0" id="start_test" role="button" class="outline contrast" style="display: none;">Start personality test</a>
+    {% endif %}
+</div>
+<div></div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='new_user.js') }}"></script>
+{% endblock %}
