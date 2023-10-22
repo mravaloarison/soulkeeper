@@ -23,7 +23,7 @@ I was guided by the **ImmortalAI**'s introduction, One of [Careyaya](https://www
 - **MULTIavatar API**: I integrated the MULTIavatar API to allow users to create avatars.
 - **PostgreSQL (Psql)**: as database to store user data and avatar information.
 - **NewsAPI**: NewsAPI was used to generate content from current news, enabling avatars to discuss a wide range of topics.
-- **OpenAI's GPT-3**: GPT-3 to generate personalized responses for avatars based on their personality traits and user interactions.
+- **OpenAI's GPT-3**: GPT-3 to generate personalized responses for avatars based on their personality traits and user interactions. Which is not integrated At this time
 - **Pico CSS**: for coding plain HTML with very basic and very simple style for webUI
 - **Simple MATH**: Logics to create precisions of data output
 
